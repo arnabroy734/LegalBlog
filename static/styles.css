@@ -1,0 +1,275 @@
+/* Defining Custom Colors */
+:root {
+    --color1: #06283D;
+    --color2: #256D85;
+    --color3: #47B5FF;
+    --color4: #DFF6FF;
+    --color5: #e69b45;
+}
+
+/* font family */
+html {
+    font-family: 'Roboto', serif;
+    /* font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif; */
+    /* font-family: 'Roboto Slab', serif; */
+    /* font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;; */
+}
+
+p{
+    font-family: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+/* Title Section Styling */
+.navbar {
+    background-color: white;
+}
+
+/* #title .navbar-brand {
+    font-size: 2rem;
+} */
+
+#title .nav-link {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color1);
+}
+
+#title .nav-link:hover {
+    color: var(--color5);
+}
+
+
+
+/* Home Section Styling */
+#home {
+    margin-top: 5%;
+}
+
+#home h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1.5;
+    
+}
+
+#home p {
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+.features {
+    font-weight: 500;
+    color: var(--color2);
+    text-align: center;
+}
+
+.feature-icon{
+    color: var(--color5);
+} 
+
+@media (max-width: 1024px){
+    #home{
+        text-align: center;
+    }
+}
+
+
+
+/* BLOGS PAGE */
+.subjectlist .list-group-item{
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+.subjectlist .list-group-item:hover, 
+.subjectlist .list-group-item.active{
+    border: solid 1px;
+    border-color: var(--color1);
+    background-color: white;
+    color: var(--color1);
+    font-weight: 700;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.blog-nav .nav-link{
+    color: var(--color2);
+    font-weight: 500;
+}
+.blog-nav .nav-link.active{
+    color: var(--color5);
+    font-weight: 700;
+}
+
+.dropdown-item.active, 
+.dropdown-item:active {
+    background-color: var(--color2);
+    color: white;
+}
+
+.blog-input-small{
+    width: 40%;
+}
+
+.blog-input-large {
+    width: 100%;
+}
+
+@media (max-width: 1400px){
+    .blog-search {
+        width: 100%;
+    }
+}
+
+
+.blog-search .form-control{
+    box-shadow: none;
+}
+.blog-search .form-control:focus{
+    border-color: var(--color3);
+}
+.blog-search .btn {
+    background-color: var(--color2);
+    box-shadow: none;
+    border: none;
+}
+.blog-search .btn:active{
+    background-color: var(--color5);
+    box-shadow: none;
+}
+
+.blog-list {
+    text-align: justify;
+}
+.blog-list h4{
+    color: var(--color1);
+}
+.blog-list h4:hover{
+    cursor: pointer;
+    color: var(--color2);
+}
+.blog-list .badge, .blog .badge, .badge.like{
+    /* border: solid var(--color5) 0.5px; */
+    color: var(--color5);
+    background-color: whitesmoke;
+}
+
+.blog-list h4 {
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+.blog-list p{
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.blog-list .btn {
+    background-color: whitesmoke;
+    color: var(--color5);
+    border: none;
+    box-shadow: none;
+    font-weight: bold;
+}
+.blog-list .btn:active {
+    background-color: var(--color5);
+    color: white;
+    border: none;
+    box-shadow: none;
+}
+
+
+/*BLOG PAGE STYLE*/
+.blog {
+    text-align: justify;
+    line-height: 2;
+    width: 50%;
+}
+
+.blog h1{
+    color: var(--color1);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.5;
+    padding-bottom: 20px;
+}
+
+.blog h2{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.blog p{
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 2;
+}
+
+.blog h2, .blog h3, .blog h4, .blog h5, .blog h6{
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.5;
+}
+
+.badge.like:hover {
+    cursor: pointer;
+    color: white;
+    background-color: var(--color5);
+}
+
+.badge.like.active {
+    color: white;
+    background-color: var(--color5);
+}
+
+@media (max-width: 1024px){
+    .blog{
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+/* Editor Section and LOGIN SECTION*/
+#editor .form-label, #login .form-label{
+    font-weight: bold;
+}
+#editor .form-control, #editor .form-select, #login .form-control{
+    box-shadow: none;
+    font-weight: 500;
+    color: var(--color1);
+}
+
+#editor .form-control:focus, #editor .form-select:focus, #login .form-control:focus{
+    border: solid 1px var(--color5);
+}
+#editor .btn, #login .btn {
+    background-color: var(--color2);
+    box-shadow: none;
+    border: none;
+}
+#editor .btn:active, #login .btn:active{
+    background-color: var(--color5);
+    box-shadow: none;
+}
+
+/* Login Page */
+#login {
+    text-align: center;
+    margin-top: 100px;
+}
+#loginform, #resetform, #registerform, #changepass {
+    width: 400px;
+    margin: auto;
+}
+#login a {
+    color: var(--color2);
+}
+#result h1 {
+    font-size: 3rem;
+}
+#result p {
+    font-size: 1.2rem;
+}

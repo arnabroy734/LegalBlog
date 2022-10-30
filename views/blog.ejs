@@ -1,0 +1,87 @@
+<%- include('header'); %>
+
+
+    <body>
+        <div class="container-lg blog">
+
+
+            <div class="container ps-0 sticky-top bg-white">
+                <a href="/"><img src="/static/images/nav-logo.png" alt="" width="64" height="64" class="mt-3"></a>
+                <span class="badge rounded-pill p-2 ms-3">
+                    <%=subject%>
+                </span>
+                <span class="badge rounded-pill p-2 ms-1">
+                    <% let monthDict = {0 : "Jan", 1 : "Feb", 2 : "Mar", 3 : "Apr", 4: "May", 5 : "Jun", 6 : "July", 7 : "Aug", 8 : "Sep", 9 : "Oct", 10 : "Nov", 11 : "Dec"};%>
+                    <% let dateFormat = new Date(date);%>
+                    <% dateFormat = monthDict[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear();%>
+                    <%=dateFormat%>
+                </span>
+
+                <% if (exam != "noexam") { %>
+                <span class="badge rounded-pill p-2 ms-1">    
+                    <%=exam%>
+                </span>
+                <% } %>
+                <!-- <div class="container d-inline float-end"> -->
+                <span class="badge rounded-pill p-2 like ms-1" id="<%=id%>">
+                    <span><i class="fa-regular fa-thumbs-up me-2 fa-lg"></i></span>
+                    <span class="align-baseline" id="like"><%=likes%> Likes</span>
+                </span>
+                <!-- </div> -->
+
+
+                <h1 class="mt-2">
+                    <%=blogTitle%>
+                </h1>
+            </div>
+
+            <!-- <button type="submit" class="btn btn-outline-primary mt-3">Indian Constitution</button> -->
+
+
+            <div class="container ps-0 blog-body mb-5" id="blogContent">
+                <%- blogBody %>
+            </div>
+
+
+        </div>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <script>
+            var like = document.getElementsByClassName("like");
+            like[0].addEventListener("click", function () {
+                let classList = this.classList;
+                let docId = this.id;
+                var like = 0;
+
+                if (!Array.from(this.classList).includes("active")) {// if it already gets like, then no actin is required
+                    classList.add("active");
+                    like = 1;
+                }
+                else {
+                    classList.remove("active");
+                    like = -1;
+                }
+
+                fetch("/blog/" + docId, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ like: like })
+                })
+                    .then((response) => response.json())
+                    .then((likes) => {
+                        document.getElementById("like").innerHTML = likes.likes + " Likes";
+                    });
+            });
+
+
+        </script>
+    </body>
+
+    </html>
