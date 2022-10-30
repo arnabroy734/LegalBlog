@@ -34,7 +34,8 @@ function updateBloglist() {
 //Update UI
 function updateUI(blogviews) {
 
-    let monthDict = { 0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "Jun", 6: "July", 7: "Aug", 8: "Sep", 9: "Oct", 10: "Nov", 11: "Dec" };
+    let monthDict = { 0: "Jan", 1: "Feb", 2: "Mar", 3: "Apr", 4: "May", 5: "Jun", 
+                    6: "July", 7: "Aug", 8: "Sep", 9: "Oct", 10: "Nov", 11: "Dec" };
 
     let blogList = document.getElementById("blog-list");//container for blog list
     blogList.innerHTML = ''; // Empty bloglist if there are no blogs
@@ -290,7 +291,7 @@ searchinput.addEventListener ("input", debounce( (ev) =>{
                 dropdownMenu.appendChild(listItem);
             })
         })
-        .catch((error) => {});
+        .catch((error) => {console.log("cannot fetch search result")});
 },2000));
 
 

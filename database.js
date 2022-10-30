@@ -30,8 +30,8 @@ var Blog = mongoose.model("Blog", blogSchema);
 //Async Function to Connect with Remote DB
 function connectDB() {
     //connect to mongo atlas
-    // let uri = "mongodb+srv://" + process.env.ATLAS_UID + ":" + process.env.ATLAS_PASS + "@cluster0.oxanwkk.mongodb.net/blogDB?retryWrites=true&w=majority";
-    let uri = "mongodb://127.0.0.1:27017/legalblogDB";
+    let uri = "mongodb+srv://" + process.env.ATLAS_UID + ":" + process.env.ATLAS_PASS + "@cluster0.oxanwkk.mongodb.net/blogDB?retryWrites=true&w=majority";
+    // let uri = "mongodb://127.0.0.1:27017/legalblogDB";
     return mongoose.connect(uri);
 }
 
@@ -229,8 +229,6 @@ async function searchBlog (query){
         console.log(error);
         throw Error(error);
     }
-
-
 }
 
 

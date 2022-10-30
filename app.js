@@ -56,7 +56,6 @@ app.get("/", (req, res) => {
     res.render("home",
         {
             title: CONST.TITLE,
-            
             homePageDesc: CONST.HOME_PAGE_DESC,
             feature1: CONST.FEATURE_1_DESC,
             feature2: CONST.FEATURE_2_DESC,
@@ -69,7 +68,6 @@ app.get("/", (req, res) => {
 app.route("/blogs")
     .get((req, res) => {
 
-        console.log("Get blogs route is firing");
 
         let editor = false;
         if (req.isAuthenticated()) { //Editor is logged in
@@ -91,7 +89,6 @@ app.route("/blogs")
             });
     })
     .post((req, res) => {
-        console.log("Post blogs route is firing");
 
 
         let subjects = db.getSubjects(); //get promise for subjects
@@ -123,7 +120,7 @@ app.route("/blogs")
                     let blogview = {
                         id: blog._id,
                         title: blog.blogTitle,
-                        paragraph: htmlToTExt.convert(blog.blogBody).substring(1, 10),
+                        paragraph: getParagraphFromBlog(blog.blogBody),
                         subject: subjectDict[blog.subject],
                         exam: examDict[blog.exam],
                         date: blog.date,
@@ -137,13 +134,28 @@ app.route("/blogs")
                 res.send(blogviews);
             })
 
+        function getParagraphFromBlog(blogbody){ //Extract only paragraph tags from blogbody and send 300 characters
+            let options = {
+                selectors: [ 
+                    {selector: 'p'} ,
+                    {selector: 'img', format: 'skip'},
+                    {selector: 'h1', format: 'skip'},
+                    {selector: 'h2', format: 'skip'},
+                    {selector: 'h3', format: 'skip'},
+                    {selector: 'h4', format: 'skip'},
+                    {selector: 'h5', format: 'skip'},
+                    {selector: 'h6', format: 'skip'}
+                ]
+            }
+            return htmlToTExt.convert(blogbody, options).substring(1,300) + " ...";
+        }
+
     });
 
 //3. Blog route
 app.route("/blog/:id")
     .get((req, res) => {
 
-        console.log("Blog route is firing with " + req.params.id);
         db.getBlogById(req.params.id)
             .then((data) => {
                 let id = data.blog._id;
@@ -154,8 +166,6 @@ app.route("/blog/:id")
                 let exam = data.exam;
                 let likes = data.blog.likes
 
-                // console.log(subject);
-                // console.log(exam);
 
                 res.render("blog", {
                     title: CONST.TITLE,
@@ -204,7 +214,8 @@ app.get("/editor", (req, res) => {
                     blogBody: "",
                     blogId: ""
                 });
-            });
+            })
+            .catch((error) => console.log("cannot load editor page"));
     }
     else {
         res.redirect("/login/login");
@@ -238,7 +249,8 @@ app.get("/editor/:id", (req, res) => {
                     blogBody: blogBody,
                     blogId: blogId
                 });
-            });
+            })
+            .catch((error) => console.log("cannot load editor page"));
     }
     else {
         res.redirect("/login/login");
@@ -288,7 +300,7 @@ app.post("/save", imageUpload.deleteExtraImages, (req, res) => {
                 res.send({ status: result });
                 // Result is _id if it is newly created
                 //Result is "error" if the operation fails
-                //Result is "updated" if existing document gets uodate
+                //Result is "updated" if existing document gets update
             });
     }
     else {
@@ -384,8 +396,9 @@ app.post("/change_pass", (req, res) => {
 
 
 //CREATING SERVER ON PORT 4000 - Only when Database connection is successful
+const PORT = process.env.PORT || 4000;
 app.on("ready", () => {
-    app.listen(4000, () => {
-        console.log("Server is running on port: 4000");
+    app.listen(PORT, () => {
+        console.log(`Server is running on port: ${PORT}`);
     });
 });

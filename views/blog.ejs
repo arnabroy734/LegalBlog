@@ -77,7 +77,8 @@
                     .then((response) => response.json())
                     .then((likes) => {
                         document.getElementById("like").innerHTML = likes.likes + " Likes";
-                    });
+                    })
+                    .catch((error) => console.log("cannot fetch likes"));
             });
 
 
